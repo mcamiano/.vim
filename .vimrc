@@ -7,7 +7,7 @@ set nocompatible
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 let mapleader = ","
-let g:project_dir = "~/Workspace"
+let g:project_dir = "~/workspace"
 
 
 " ------------------------------------------------------------
@@ -41,12 +41,14 @@ set splitright
 " Search behavior
 set ignorecase
 set smartcase
-set gdefault
+set nogdefault
 set incsearch
 set showmatch
 set hlsearch
-nnoremap / /\v
-vnoremap / /\v
+"   Turn off the inobvious / mapping. 
+"   When I want special characters, I'll say so.
+"   nnoremap / /\v
+"   vnoremap / /\v
 map <leader><space> :let @/=''<cr>
 
 " Persistent undo
@@ -193,4 +195,18 @@ endfunction
 autocmd User Rails Rnavcommand factory        spec/factories            -glob=* -suffix=_factories.rb
 autocmd User Rails Rnavcommand feature        features                  -glob=* -suffix=.feature
 autocmd User Rails Rnavcommand stepdefinition features/step_definitions -glob=* -suffix=_steps.rb
+
+" Wrap words in next typed quotation character using the surround plugin
+map = ysiw
+map \= yss
+
+
+" For interactive_editor gem
+if &t_Co > 2 || has("gui_running")
+  syntax on
+endif
+
+au BufRead,BufNewFile *.scss set filetype=scss
+let g:localvimrc_ask = 0
+
 
